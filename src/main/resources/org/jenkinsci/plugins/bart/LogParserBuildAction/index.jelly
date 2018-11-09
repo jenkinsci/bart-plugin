@@ -1,0 +1,338 @@
+<?jelly escape-by-default='false'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <l:layout>
+        <style type="text/css">
+            .container {
+            max-width: 900px;
+            }
+
+            .table td, .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #eceeef;
+            }
+            .additional-hint {
+            background-color: #fcf8e3;
+            border: 1px solid #f2e396;
+            padding: 10px;
+            }
+            .additional-hint h3 {
+            margin-top: 0;
+            }
+            .exclamation-mark {
+            padding: 10px;
+            text-align: center;
+            float: left;
+            width: 10%; }
+            .additional-hint-content {
+            width: 100%;
+            padding-left: 10%;
+            }
+            code p {
+            margin-bottom: 0;
+            margin-top:0;
+            font-size: 90%;
+            }
+            .simple-table th, .simple-table td {
+            text-align:left;
+            }
+            .simple-table tr > *:first-child {
+            width: 60px;
+            }
+            .simple-table {
+            border-bottom: 1px solid black;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            }
+            body .simple-table:last-of-type {
+            border-bottom:0;
+            margin-bottom:0;
+            padding-bottom:0;
+            }
+            .best-solution {
+            padding: 10px;
+            *width: 70%;
+            }
+
+            /* Stackoverflow Styles */
+
+            .stackoverflow code {
+            font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans
+            Mono, Courier New, monospace, sans-serif;
+            background-color: #eff0f1
+            }
+            .stackoverflow
+            pre {
+            margin-bottom: 1em;
+            padding: 5px;
+            padding-bottom: 20px !ie7;
+            width: auto;
+            width: 650px !ie7;
+            max-height: 600px;
+            overflow: auto;
+            font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans
+            Mono, Courier New, monospace, sans-serif;
+            font-size: 13px;
+            background-color: #eff0f1
+            }
+            .stackoverflow
+            .post-text pre>code:first-child, .stackoverflow
+            .wmd-preview pre>code:first-child {
+            max-height: 600px\9;
+            display: block\9
+            }
+            .stackoverflow
+            pre {
+            max-height: none\9
+            }
+            .stackoverflow
+            li pre {
+            margin: .5em 0 1em 0
+            }
+            .stackoverflow
+            h1, .stackoverflow
+            h2, .stackoverflow
+            h3 {
+            line-height: 1.3;
+            margin: 0 0 1em
+            }
+            .stackoverflow
+            h1 {
+            font-size: 22px
+            }
+            .stackoverflow
+            h2 {
+            font-size: 18px
+            }
+            .stackoverflow
+            h3 {
+            font-size: 15px
+            }
+            .stackoverflow
+            h1.lead, .stackoverflow
+            h2.lead {
+            font-weight: 400
+            }
+            .stackoverflow
+            h1.lead {
+            font-size: 2.6em;
+            margin-bottom: .3em
+            }
+            .stackoverflow
+            h2.lead {
+            font-size: 1.7em
+            }
+            .stackoverflow
+            .post-text h1, .stackoverflow
+            .post-text h2, .stackoverflow
+            .post-text h3, .stackoverflow
+            .post-text h4, .stackoverflow
+            .post-text h5, .stackoverflow
+            .post-text h6 {
+            word-wrap: break-word
+            }
+            .stackoverflow
+            .post-text ul p:last-of-type, .stackoverflow
+            .wmd-preview ul p:last-of-type, .stackoverflow
+            .post-text ol p:last-of-type, .stackoverflow
+            .wmd-preview ol p:last-of-type {
+            margin-bottom: 0
+            }
+            .stackoverflow
+            .post-text li>ul, .stackoverflow
+            .wmd-preview li>ul, .stackoverflow
+            .post-text li>ol, .stackoverflow
+            .wmd-preview li>ol {
+            padding-top: .5em
+            }
+            .stackoverflow
+            blockquote, .stackoverflow
+            q {
+            quotes: none
+            }
+            .stackoverflow
+            blockquote:before, .stackoverflow
+            q:before, .stackoverflow
+            blockquote:after, .stackoverflow
+            q:after {
+            content: "";
+            content: none
+            }
+            .stackoverflow
+            blockquote {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #FFF8DC;
+            border-left: 2px solid #ffeb8e
+            }
+            .stackoverflow
+            blockquote *:last-child {
+            margin-bottom: 0
+            }
+            .stackoverflow
+            li blockquote {
+            margin: .5em 0 1em 0
+            }
+            .stackoverflow
+            .str, .stackoverflow
+            .lit, .stackoverflow
+            .tag {
+            color: #7D2727
+            }
+            .stackoverflow
+            .kwd, .stackoverflow
+            .dec {
+            color: #101094
+            }
+            .stackoverflow
+            .com {
+            color: #858C93
+            }
+            .stackoverflow
+            .typ {
+            color: #2B91AF
+            }
+            .stackoverflow
+            .pun, .stackoverflow
+            .pln {
+            color: #303336
+            }
+            .stackoverflow
+            .atn {
+            color: #E64320
+            }
+            .stackoverflow
+            .atv {
+            color: #0F74BD
+            }
+            .stackoverflow
+            .prettyprint {
+            display: block;
+            color: #393318
+            }
+            .SUCCESS td {
+            color: #27ae60;
+            }
+            .FAILURE td {
+            color: #c0392b;
+            }
+            .SKIPPED td {
+            color: #f1c40f;
+            }
+
+        </style>
+        <st:include it="${it.build}" page="sidepanel.jelly"/>
+        <l:main-panel>
+            <div class="row">
+                <div class="col-md-16">
+                    <h1>${it.displayName}</h1>
+                    <h2>Build Log Analysis</h2>
+                    <table class="pane bigtable">
+                        <tbody>
+                            <tr>
+                                <th>Build Status</th>
+                                <td>Failed</td>
+                            </tr>
+                            <tr>
+                                <th>Failed Goal</th>
+                                <td>${it.parserSummary.failedGoal}</td>
+                            </tr>
+                            <tr>
+                                <th>Error Cause</th>
+                                <td>${it.parserSummary.errorCause}</td>
+                            </tr>
+                            <j:if test='${it.parserSummary.reactor != null}'>
+                            <tr>
+                                <th>Reactor</th>
+                                <td>
+                                    <table>
+                                        <j:forEach items="${it.parserSummary.reactor}" var="reactor" indexVar="reactorIndex">
+                                            <tr class="${reactor.status}">
+                                                <td>${reactor.name}</td>
+                                                <td>${reactor.status}</td>
+                                            </tr>
+                                        </j:forEach>
+                                    </table>
+
+                                </td>
+                            </tr>
+                            </j:if>
+                        </tbody>
+                    </table>
+                    <br></br>
+                    <h2>Reason for Build Failure:
+                        <i>${it.parserSummary.errorCause}</i>
+                    </h2>
+                    <j:if test='${it.parserSummary.hint != null}'>
+                        <j:set var="hint" value="${it.parserSummary.hint}"/>
+
+                        <section class="additional-hint">
+                            <div class="exclamation-mark">
+                                <img src="/jenkins/static/b386df8b/images/48x48/yellow.png"
+                                     style="width: 48px; height: 48px; margin: 2px;"
+                                     class="icon-next icon-md"/>
+                            </div>
+                            <div class="additional-hint-content">
+                                <h3>Hint: ${it.parserSummary.hint.name}</h3>
+                                <st:include page="hint/${hint.view}.jelly"/>
+                            </div>
+                        </section>
+                    </j:if>
+                    <br></br>
+                    <h2>Stack Exchange Analysis</h2>
+                    <h3>This may help you fix your build:</h3>
+                    <j:if test="${it.parserSummary.bestQuestion != null}">
+                        <j:set var="bestQuestion" value="${it.parserSummary.bestQuestion}"/>
+                        <div class="stackoverflow">
+                            <div class="best-solution">
+                                ${bestQuestion.bestAnswer.body}
+                                <br></br>
+                            </div>
+                            <h3><strong>Full Discussion: </strong><a target="_blank" href="${bestQuestion.link}">${bestQuestion.link}</a></h3>
+                        </div>
+                        <br></br>
+                        <h2>Other useful ressources (StackOverflow)</h2>
+                        <div class="pane-frame">
+                            <j:if test="${it.evaluations.size() > 0}">
+                                <table id="projectstatus" class="sortable pane bigtable stripped-odd">
+                                    <tbody>
+                                        <tr class="header">
+                                            <th>#</th>
+                                            <th title="Title of StackExchange Question">Title</th>
+                                            <th>SO</th>
+                                            <th tooltip="How Accurate is the question related to the build failure"
+                                                title="How Accurate is the question related to the build failure">Rating
+                                            </th>
+                                        </tr>
+                                        <j:forEach items="${it.evaluations}" var="evaluation" indexVar="evIndex">
+                                            <tr>
+                                                <td>
+                                                    ${evIndex+1}
+                                                </td>
+                                                <td>
+                                                    <h3>Question: ${evaluation.question.title}</h3>
+                                                </td>
+                                                <td>
+                                                    <a target="_blank" href="${evaluation.question.link}"
+                                                       class="task-icon-link">
+                                                        <img src="/jenkins/static/b386df8b/images/24x24/next.png"
+                                                             style="width: 24px; height: 24px; margin: 2px;"
+                                                             class="icon-next icon-md"/>
+                                                    </a>
+                                                </td>
+                                                <td>${evaluation.contextRating*100}</td>
+                                            </tr>
+                                        </j:forEach>
+                                    </tbody>
+                                </table>
+                            </j:if>
+                        </div>
+                    </j:if>
+                    <j:if test="${it.parserSummary.bestQuestion == null}">
+                        <p>Sorry, we did not find anything on stackoverflow. :-(</p>
+                    </j:if>
+                </div>
+            </div>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>

@@ -1,0 +1,23 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <p>Your build contains a <strong>dependency</strong> error, check the following dependency
+    </p>
+    <table class="simple-table no-border-table">
+        <tbody>
+            <tr>
+                <th>Project:</th>
+                <td>${hint.project}</td>
+            </tr>
+            <tr>
+                <th>Dependency:</th>
+                <td>${hint.dependency}</td>
+            </tr>
+            <tr>
+                <th>Reason:</th>
+                <td>${hint.reason}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="small">Check your pom.xml file.
+    </p>
+</j:jelly>

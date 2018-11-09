@@ -1,0 +1,20 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <p>Your build contains a compilation error. Please check the following file:</p>
+    <table class="simple-table no-border-table">
+        <tbody>
+            <tr>
+                <th>File:</th>
+                <td>${hint.javaFile}</td>
+            </tr>
+            <tr>
+                <th>Line:</th>
+                <td>${hint.errorLine}</td>
+            </tr>
+            <tr>
+                <th>Reason:</th>
+                <td>${hint.errorReason}</td>
+            </tr>
+        </tbody>
+    </table>
+</j:jelly>

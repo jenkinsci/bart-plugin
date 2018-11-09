@@ -1,0 +1,25 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <p>Your build contains <strong>${hint.checkstyleViolations.size()}</strong> checkstyle violation(s). Please check the violations(s) below:
+    </p>
+    <j:forEach items="${hint.checkstyleViolations}" var="test" indexVar="checkIndex">
+        <table class="simple-table no-border-table">
+            <tbody>
+                <tr>
+                    <th>File:</th>
+                    <td>${test.javaFile}</td>
+                </tr>
+                <tr>
+                    <th>Line:</th>
+                    <td>${test.lineNumber}</td>
+                </tr>
+                <tr>
+                    <th>Reason:</th>
+                    <td>${test.reason}</td>
+                </tr>
+            </tbody>
+        </table>
+    </j:forEach>
+    <br></br>
+    <p class="small">Depending on your checkstyle configuration, your build will ignore violations marked with <i>warning</i></p>
+</j:jelly>

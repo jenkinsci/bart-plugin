@@ -1,0 +1,28 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout">
+    <p>Your build contains <strong>${hint.failedJavaTests.size()}</strong> test error(s). Please check the test(s) below:
+    </p>
+    <j:forEach items="${hint.failedJavaTests}" var="test" indexVar="testIndex">
+        <table class="simple-table no-border-table">
+            <tbody>
+                <tr>
+                    <th>File:</th>
+                    <td>${test.javaFile}</td>
+                </tr>
+                <tr>
+                    <th>Test:</th>
+                    <td>${test.testName}</td>
+                </tr>
+                <tr>
+                    <th>Line:</th>
+                    <td>${test.lineNumber}</td>
+                </tr>
+                <tr>
+                    <th>Info:</th>
+                    <td>${test.value}</td>
+                </tr>
+            </tbody>
+        </table>
+    </j:forEach>
+
+</j:jelly>
