@@ -38,7 +38,7 @@ public class LogParserPublisher extends Recorder {
         return BuildStepMonitor.NONE;
     }
 
-    @Symbol("greet")
+    @Symbol("bart")
     @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
