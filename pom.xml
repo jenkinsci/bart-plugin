@@ -15,7 +15,7 @@
         <java.level>8</java.level>
     </properties>
     <name>BART Plugin</name>
-    <url>https://bart.tzemp.ch</url>
+    <url>https://wiki.jenkins.io/display/JENKINS/BART+Plugin</url>
     <description>BART - A tool for summarizing and providing solutions to build breaks for maven projects</description>
 
     <licenses>
